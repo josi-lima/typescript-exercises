@@ -1,3 +1,5 @@
+// *************** UNION TYPES *******************
+
 // Basic Union Type:
 let age: number | string = 21;
 age = 23;
