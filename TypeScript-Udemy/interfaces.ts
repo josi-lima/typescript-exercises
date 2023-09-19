@@ -9,9 +9,9 @@ interface Password {
   x: number;
   y: number;
 }
-const pt: Password = { x: 1983, y: 1234 };
+const pin: Password = { x: 17983, y: 12345 };
 
-// we can then use them to create reusable, modular types that describe the shapes of objects
+// we can then use them to create reusable, modular types that describe the shapes of objects, ONLY objects.
 
 // -----------------------------------------
 
@@ -25,6 +25,8 @@ const pt: Password = { x: 213, y: 12 }
 */
 
 // ==========================================
+
+// readonly and optional interfaces properties
 
 interface Person {
   readonly id: number;
@@ -45,8 +47,9 @@ const thomas: Person = {
   },
 };
 
-thomas.first = "kasjdh";
-// thomas.id = 238974;
+thomas.first = "Caleb";
+// thomas.id = 238974;  
+// --> cannot assign to 'id' because it is a read-only property
 
 // ==========================================
 
