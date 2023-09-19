@@ -11,6 +11,8 @@ const lotteryNums: number[] = [23, 45, 18, 34, 67, 10]
 // this is a tuple!
 const color: [number, number, number] = [255, 0, 45];
 
+// -----------------------------------
+
 type HTTPResponse = [number, string];
 
 const goodRes: HTTPResponse = [200, "OK"];
@@ -52,29 +54,4 @@ console.log(employee);
 
 // ==========================================
 
-// Enum Example:
-
-enum OrderStatus {
-  PENDING,
-  SHIPPED,
-  DELIVERED,
-  RETURNED,
-}
-const myStatus = OrderStatus.DELIVERED;
-
-function isDelivered(status: OrderStatus) {
-  return status === OrderStatus.DELIVERED;
-}
-
-isDelivered(OrderStatus.RETURNED);
-
-// String Enum:
-enum ArrowKeys {
-  UP = "up",
-  DOWN = "down",
-  LEFT = "left",
-  RIGHT = "right",
-}
-
-// ==========================================
 
