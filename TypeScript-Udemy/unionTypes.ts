@@ -40,6 +40,8 @@ printAge(38);
 
 // -----------------------------------------------
 
+// type narrowing with union types
+
 // On this example, price could be a number or a string depending on the $ sign in it
 // the conditional establishes a type narrowing
 
@@ -62,7 +64,12 @@ const basket: (number | string)[] = [10, 78, 30, 'luckyNumbers'];
 
 // -----------------------------------------------
 
-// Don't confuse with this other case
+// Don't confuse with these other cases
+
+// the variable is either a number OR an array of elements
+let hotel: number | string[] = 409;
+hotel = ['room 409', 'room 350', 'room 102']; 
+
 
 // union type of an array of numbers OR an array of strings 
 let differentItems: number[] | string[] = [89, 25, 33, 4];
