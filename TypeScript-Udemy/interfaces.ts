@@ -2,6 +2,8 @@
 
 // interfaces serve almost the same exact purpose as type aliases (with a slightly different syntax).
 
+// key-difference: we have to use a type alias instead of an interface if we are not describing the shape of an object
+
 // ==========================================
 
 // Password using an INTERFACE:
@@ -67,7 +69,7 @@ const littleBird: Bird = {
     return 'lalala';
   },
 };
-console.log(littleBird.sing())
+console.log(littleBird.sing());
 
 // ==========================================
 
@@ -82,23 +84,27 @@ interface Product {
 const shoes: Product = {
   name: "Blue Suede Shoes",
   price: 100,
-  applyDiscount(amount: number) {
+  applyDiscount(amount: number) {  
     const newPrice = this.price * (1 - amount);
-    this.price = newPrice;
-    return this.price;
+    return newPrice;
   },
 };
 console.log(shoes.applyDiscount(0.4));
 
+ // the parameter can take the same name declared in the interface, or not.
+
 // ==========================================
 
 // Re-opening an interface
+
+// Another thing we can do with interfaces is reopen and add new properties to interfaces after we've already described an interface.
 
 interface Dog {
   name: string;
   age: number;
 }
 
+// reopening the interface Dog is common when code is spread across files
 interface Dog {
   breed: string;
   bark(): string;
@@ -113,9 +119,13 @@ const elton: Dog = {
   },
 };
 
+// it will generate an error if we try to reopen a type alias
+
 // ==========================================
 
 // Extending an interface
+
+// we can extend an interface or essentially inherit from another interface (similar to the way with object oriented programming)
 
 interface ServiceDog extends Dog {
   job: "drug sniffer" | "bomb" | "guide dog";
@@ -130,8 +140,13 @@ const chewy: ServiceDog = {
   },
   job: "guide dog",
 };
+console.log(chewy)
 
 // ==========================================
+
+// Extending multiple interfaces
+
+// interfaces can extend multiple other interfaces, with multiple inheritance.
 
 interface Human {
   name: string;
@@ -142,10 +157,12 @@ interface Employee {
   email: string;
 }
 
-// Extending multiple interfaces
+// extending the interfaces from right above
+
 interface Engineer extends Human, Employee {
   level: string;
   languages: string[];
+  hobby?: string;
 }
 
 const pierre: Engineer = {
@@ -153,7 +170,8 @@ const pierre: Engineer = {
   id: 123897,
   email: "pierre@gmail.com",
   level: "senior",
-  languages: ["JS", "Python"],
+  languages: ["JS", "Python", "Java"],
 };
+console.log(pierre);
 
 // ==========================================
