@@ -46,12 +46,32 @@ const thomas: Person = {
     return "Howdy!";
   },
 };
+console.log(thomas.sayHi());
 
 thomas.first = "Caleb";
 // thomas.id = 238974;  
 // --> cannot assign to 'id' because it is a read-only property
 
 // ==========================================
+
+// another method in interfaces
+
+interface Bird {
+  name: string;
+  sing: () => string;
+}
+
+const littleBird: Bird = {
+  name: "humming bird",
+  sing: () => {
+    return 'lalala';
+  },
+};
+console.log(littleBird.sing())
+
+// ==========================================
+
+// methods with parameters in interfaces
 
 interface Product {
   name: string;
@@ -68,12 +88,12 @@ const shoes: Product = {
     return this.price;
   },
 };
-
 console.log(shoes.applyDiscount(0.4));
 
 // ==========================================
 
-// Re-opening an interface:
+// Re-opening an interface
+
 interface Dog {
   name: string;
   age: number;
@@ -95,7 +115,8 @@ const elton: Dog = {
 
 // ==========================================
 
-// Extending an interface:
+// Extending an interface
+
 interface ServiceDog extends Dog {
   job: "drug sniffer" | "bomb" | "guide dog";
 }
