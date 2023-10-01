@@ -123,23 +123,47 @@ const bools = makeEmptyArray<boolean>();
 
 // =============================================
 
-// A Generic Class Example
+// A generic class example
+
 interface Song {
   title: string;
   artist: string;
 }
-interface Video {
+interface Movie {
   title: string;
-  creator: string;
-  resolution: string;
+  director: string;
+  mainActor: string;
 }
 
+// class type T
 class Playlist<T> {
   public queue: T[] = [];
-  add(el: T) {
-    this.queue.push(el);
+  add(item: T) {
+    this.queue.push(item);
+    return item;
   }
 }
 
+// -------------------------------------------
+
+// class Playlist type Song
 const songs = new Playlist<Song>();
-const videos = new Playlist<Video>();
+const hit = songs.add({title: "Bicicleta", artist: "Shakira"});
+
+console.log(`Song: ${hit.title} by ${hit.artist}.`);
+// Song: Bicicleta by Shakira.
+
+// -------------------------------------------
+
+// class Playlist type Movie
+const movies = new Playlist<Movie>();
+const cinema = movies.add({
+  title: "Titanic", 
+  director: "James Cameron", 
+  mainActor: "Leonardo DiCaprio",
+});
+
+console.log(`Movie: ${cinema.title} by ${cinema.director} with ${cinema.mainActor}.`);
+// Movie: Titanic by James Cameron with Leonardo DiCaprio.
+
+// =============================================
