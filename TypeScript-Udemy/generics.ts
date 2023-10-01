@@ -1,11 +1,22 @@
+// *************** GENERICS *******************
+
+// generics  allow us to define reusable functions and classes that work with multiples types rather than a single type
+
+// --------------------------------------------
+
 // Providing a type to querySelector:
-const inputEl = document.querySelector<HTMLInputElement>("#username")!;
-console.dir(inputEl);
-inputEl.value = "Hacked!";
 
-const btn = document.querySelector<HTMLButtonElement>(".btn")!;
+// querySelector is a generic function that accepts a specific type within
 
-// Without Generics...Lots of Repetition!
+// const inputEl = document.querySelector<HTMLInputElement>("#username")!;
+// console.dir(inputEl);
+// inputEl.value = "Hacked!";
+
+// const btn = document.querySelector<HTMLButtonElement>(".btn")!;
+
+// =============================================
+
+// Without Generics... Lots of Repetition!
 function numberIdentity(item: number): number {
   return item;
 }
@@ -16,11 +27,11 @@ function booleanIdentity(item: boolean): boolean {
   return item;
 }
 
-// function identity(item: any): any{
-//   return item;
-// }
+// =============================================
 
-// With A Generic...Super Reusable!
+// With a Generic... Super Reusable!
+
+// a reusable function type T, with a parameter type T and a return type T 
 function identity<T>(item: T): T {
   return item;
 }
@@ -35,37 +46,73 @@ function getRandomElement<T>(list: T[]): T {
 
 console.log(getRandomElement<string>(["a", "b", "c"]));
 getRandomElement<number>([5, 6, 21, 354, 567, 234, 654]);
+
+// typeScript infers the type without passing it, hover the element to check
 getRandomElement([1, 2, 3, 4]);
 
-// Generics With Constraints:
-function merge<T extends object, U extends object>(object1: T, object2: U) {
+// =============================================
+
+// generics with more than one type parameter
+
+// typeScript infers that the return type is an intersection between T & U
+function mergeA<T, U>(object1: T, object2: U) {
   return {
-    ...object1,
+    ...object1,  // spread operator
     ...object2,
   };
 }
 
-const comboObj = merge({ name: "colt" }, { pets: ["blue", "elton"] });
-console.log(merge({ name: "Colt" }, { num: 9 }));
-merge<{ name: string }, { pets: string[] }>(
+const basket = mergeA({veggie: "lettuce"}, {fruit: "mango"});
+console.log(basket);
+// { veggie: 'lettuce', fruit: 'mango' }
+
+// =============================================
+
+// Generics with constraints (allowed types)
+function mergeB<T extends object, U extends object>(object3: T, object4: U) {
+  return {
+    ...object3,
+    ...object4,
+  };
+}
+
+const comboObj = mergeB({ name: "colt" }, { pets: ["blue", "elton"] });
+console.log(mergeB({ name: "Colt" }, { num: 9 }));
+
+mergeB<{ name: string }, { pets: string[] }>(
   { name: "colt" },
   { pets: ["blue", "elton"] }
 );
+
+// =============================================
+
+// a generics that extends an interface
 
 interface Lengthy {
   length: number;
 }
 
+// function to get the length of the word passed as a parameter
+
 function printDoubleLength<T extends Lengthy>(thing: T): number {
   return thing.length * 2;
 }
 
-// function printDoubleLength(thing: Lengthy): number {
-//   return thing.length * 2;
-// }
+console.log(printDoubleLength("abcd"));  // 8
+// printDoubleLength(234);  --> Not allowed!
 
-printDoubleLength("asdasd");
-// printDoubleLength(234); //Not allowed!
+// -------------------------------------------
+
+// without generics, just using the interface
+
+function printDouble(thing: Lengthy): number {
+  return thing.length * 2;
+}
+console.log(printDouble("abc"));  // 6
+
+// =============================================
+
+// setting a default value in a generics
 
 function makeEmptyArray<T = number>(): T[] {
   return [];
@@ -73,6 +120,8 @@ function makeEmptyArray<T = number>(): T[] {
 
 const nums = makeEmptyArray();
 const bools = makeEmptyArray<boolean>();
+
+// =============================================
 
 // A Generic Class Example
 interface Song {
