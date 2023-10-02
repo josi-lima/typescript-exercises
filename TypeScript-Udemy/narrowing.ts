@@ -35,14 +35,20 @@ console.log(printLetters());
 
 // =============================================
 
-// equality narrowing
-function someDemo(x: string | number, y: string | boolean) {
-  if (x === y) {
-    x.toUpperCase();
-  }
-}
+// equality type guards involve comparing types to each other before doing certain operations with values
 
-// IN Operator Narrowing
+// equality narrowing
+function someData(x: string | number, y: string | boolean) {
+  if (x === y) return x.toUpperCase();
+}
+console.log(someData("party time!", "party time!"));
+// PARTY TIME!
+
+// =============================================
+
+// typeScript's in operator helps check if a certain property exists in an object
+
+// defining interfaces
 interface Movies {
   title: string;
   duration: number;
@@ -54,28 +60,38 @@ interface TVShow {
   episodeDuration: number;
 }
 
-function getRuntime(media: Movies | TVShow) {
+const getRuntime = (media: Movies | TVShow) => {
   if ("numEpisodes" in media) {
     return media.numEpisodes * media.episodeDuration;
   }
   return media.duration;
 }
 
-console.log(getRuntime({ title: "Amadeus", duration: 140 }));
+console.log(getRuntime({ title: "Amadeus", duration: 140 }));  // 140
 console.log(
-  getRuntime({ title: "Spongebob", numEpisodes: 80, episodeDuration: 30 })
+  getRuntime({ title: "Spongebob", numEpisodes: 80, episodeDuration: 30 })  // 2400
 );
 
-// Instanceof Narrowing:
-function printFullDate(date: string | Date) {
+// =============================================
+
+// instanceof is TS operator that allows us to check if one thing is an instance of another, which means, if a value is within the prototype chain of another element
+
+// it can help us to narrow types when working with classes, for example
+
+// instanceof narrowing
+const printFullDate = (date: string | Date) => {
   if (date instanceof Date) {
     console.log(date.toUTCString());
   } else {
     console.log(new Date(date).toUTCString());
   }
 }
+printFullDate("09/23/2023");
+// Sat, 23 Sep 2023 03:00:00 GMT
 
-// Instanceof Narrowing:
+// ------------------------------------------
+
+// working with instanceof and classes
 class User {
   constructor(public username: string) {}
 }
@@ -91,8 +107,12 @@ function printName(entity: User | Company) {
   }
 }
 
-// Type Predicates
+// =============================================
 
+// typeScript allows us to write custom functions that can narrow the type of a value 
+// type predicate is how we name the return of this function
+
+// declaring interfaces
 interface Cat {
   name: string;
   numLives: number;
@@ -102,6 +122,7 @@ interface Dog {
   breed: string;
 }
 
+// type predicate --> parameterName is type
 function isCat(animal: Cat | Dog): animal is Cat {
   return (animal as Cat).numLives !== undefined;
 }
@@ -115,6 +136,11 @@ function makeNoise(animal: Cat | Dog): string {
     return "Woof!";
   }
 }
+
+console.log(makeNoise({name: "Bettie", breed: "Shih Tzu"}));
+// Woof!
+
+// =============================================
 
 // Discriminated Unions
 interface Rooster {
