@@ -129,7 +129,7 @@ interface Song {
   title: string;
   artist: string;
 }
-interface Movie {
+interface Production {
   title: string;
   director: string;
   mainActor: string;
@@ -156,7 +156,7 @@ console.log(`Song: ${hit.title} by ${hit.artist}.`);
 // -------------------------------------------
 
 // class Playlist type Movie
-const movies = new Playlist<Movie>();
+const movies = new Playlist<Production>();
 const cinema = movies.add({
   title: "Titanic", 
   director: "James Cameron", 
