@@ -142,6 +142,10 @@ console.log(makeNoise({name: "Bettie", breed: "Shih Tzu"}));
 
 // =============================================
 
+// discrimated unions is a common pattern in TypeScript, it involves creating a literal property that is common across multiple types
+
+// we can then narrow the type by using the literal property
+
 // Discriminated Unions
 interface Rooster {
   name: string;
@@ -171,6 +175,8 @@ interface Sheep {
   kind: "sheep";
 }
 
+// Note: in this example, all the interfaces have the same properties; however, they could have different ones and it would work normally
+
 type FarmAnimal = Pig | Rooster | Cow | Sheep;
 
 function getFarmAnimalSound(animal: FarmAnimal) {
@@ -184,11 +190,11 @@ function getFarmAnimalSound(animal: FarmAnimal) {
     case "sheep":
       return "Baaa!";
     default:
+      const _exhaustiveCheck: never = animal;
+      return _exhaustiveCheck;
       // We should never make it here, if we handled all cases correctly
       //   const shouldNeverGetHere: never = animal;
       //   return shouldNeverGetHere
-      const _exhaustiveCheck: never = animal;
-      return _exhaustiveCheck;
   }
 }
 
@@ -200,3 +206,7 @@ const stevie: Rooster = {
 };
 
 console.log(getFarmAnimalSound(stevie));
+// Cockadoodledoo!
+
+// =============================================
+
