@@ -113,21 +113,21 @@ function printName(entity: User | Company) {
 // type predicate is how we name the return of this function
 
 // declaring interfaces
-interface Cat {
+interface Cats {
   name: string;
   numLives: number;
 }
-interface Dog {
+interface Dogs {
   name: string;
   breed: string;
 }
 
 // type predicate --> parameterName is type
-function isCat(animal: Cat | Dog): animal is Cat {
-  return (animal as Cat).numLives !== undefined;
+function isCat(animal: Cats | Dogs): animal is Cats {
+  return (animal as Cats).numLives !== undefined;
 }
 
-function makeNoise(animal: Cat | Dog): string {
+function makeNoise(animal: Cats | Dogs): string {
   if (isCat(animal)) {
     animal;
     return "Meow";

@@ -119,7 +119,7 @@ function makeEmptyArray<T = number>(): T[] {
 }
 
 const nums = makeEmptyArray();
-const bools = makeEmptyArray<boolean>();
+const booleans = makeEmptyArray<boolean>();
 
 // =============================================
 
